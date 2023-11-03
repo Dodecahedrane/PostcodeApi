@@ -1,0 +1,7 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/PostcodeApi/.vs/PostcodeApi
+/PostcodeApi/PublicApi/bin/Debug/net7.0
+/PostcodeApi/PublicApi/obj
