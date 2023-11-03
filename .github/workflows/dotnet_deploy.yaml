@@ -33,6 +33,7 @@ jobs:
     
   test:
     runs-on: windows-latest
+    needs: build
     
     defaults:
       run:
