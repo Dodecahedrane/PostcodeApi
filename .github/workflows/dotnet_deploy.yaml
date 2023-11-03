@@ -25,11 +25,6 @@ jobs:
       run: dotnet restore
     - name: Build
       run: dotnet build --no-restore
-    - name: Upload artifact for test job
-        uses: actions/upload-artifact@v2
-        with:
-          name: .net-app
-          path: ${{env.DOTNET_ROOT}}/myapp
     
   test:
     runs-on: windows-latest
@@ -39,6 +34,15 @@ jobs:
         working-directory: ./PostcodeApi/
 
     steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 7.0.x
+    - name: Restore dependencies
+      run: dotnet restore
+    - name: Build
+      run: dotnet build --no-restore
     - uses: actions/checkout@v2
     - name: Test
       run: dotnet test --no-build --verbosity normal
