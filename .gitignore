@@ -6,3 +6,5 @@
 /PostcodeApi/PublicApi/bin/Debug/net7.0
 /PostcodeApi/PublicApi/obj
 /PostcodeApi/PublicApi/PublicApi.csproj.user
+/PostcodeApi/UnitTests/obj/Debug/net7.0
+/PostcodeApi/UnitTests/obj
