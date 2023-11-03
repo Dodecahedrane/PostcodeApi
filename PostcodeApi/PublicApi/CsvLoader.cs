@@ -6,7 +6,7 @@ namespace PublicApi
 {
     public class CsvLoader
     {
-        private const string CsvFilePath = "C:\\Users\\Oliver\\Downloads\\ONSPD_AUG_2023_UK\\Data\\PostcodesLatLong.csv";
+        private const string CsvFilePath = "Data\\PostcodesLatLong.csv";
 
         public List<PostcodeRecord> Records { get; private set; }
 
