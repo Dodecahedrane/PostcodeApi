@@ -60,9 +60,10 @@ jobs:
     - name: Test
       run: dotnet test --no-build --verbosity normal
 
-   deploy:
+  deploy:
     runs-on: windows-latest
     needs: build
+    
     environment:
       name: 'Production'
 
