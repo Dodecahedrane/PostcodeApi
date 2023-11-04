@@ -72,6 +72,7 @@ jobs:
           dotnet restore
           dotnet build --configuration Release
           dotnet publish -c Release --property:PublishDir='PublicApi/PostcodeApiWebApp' 
+      - task: PublishBuildArtifacts@1
           
       - name: 'Run Azure webapp deploy action using publish profile credentials'
         uses: azure/webapps-deploy@v3
