@@ -53,5 +53,18 @@ namespace PublicApi.Controllers
                 return BadRequest($"An error occurred: {ex.Message}");
             }
         }
+
+        [HttpGet("AllPostcodes")]
+        public IActionResult GetPostcodeLatLong()
+        {
+            try
+            {
+                return Ok(_csvLoader.Records);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"An error occurred: {ex.Message}");
+            }
+        }
     }
 }
