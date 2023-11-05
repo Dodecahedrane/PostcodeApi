@@ -55,7 +55,7 @@ namespace PublicApi.Controllers
         }
 
         [HttpGet("AllPostcodes")]
-        public IActionResult GetPostcodeLatLong()
+        public IActionResult GetAllPostcodes()
         {
             try
             {
