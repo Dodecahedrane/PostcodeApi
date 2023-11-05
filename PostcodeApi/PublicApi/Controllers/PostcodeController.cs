@@ -66,5 +66,36 @@ namespace PublicApi.Controllers
                 return BadRequest($"An error occurred: {ex.Message}");
             }
         }
+
+        [HttpGet("PartialPostcode")]
+        public IActionResult GetPartialPostcode([FromBody] PostcodeInputModel input)
+        {
+            string partialPostcode = input.Postcode;
+
+            if (partialPostcode == null)
+            {
+                return BadRequest($"Postcode URL Parameter is Null");
+            }
+
+            try
+            {
+                List<PostcodeRecord> result = _csvLoader.Records
+                    .Where(record => record.Postcode.Contains(partialPostcode))
+                    .ToList();
+
+                if (result != null)
+                {
+                    return Ok(result);
+                }
+                else
+                {
+                    return NotFound($"No partial matches for {partialPostcode} found.");
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"An error occurred: {ex.Message}");
+            }
+        }
     }
 }
