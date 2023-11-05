@@ -7,6 +7,7 @@ using System.Reflection.PortableExecutable;
 
 namespace PublicApi.Controllers
 {
+    [Route("")]
     public class PostcodeController : Controller
     {
         private readonly CsvLoader _csvLoader;
@@ -14,6 +15,12 @@ namespace PublicApi.Controllers
         public PostcodeController(CsvLoader csvLoader)
         {
             _csvLoader = csvLoader;
+        }
+
+        [HttpGet]
+        public IActionResult Get()
+        {
+            return Ok("The Web App Is Working!");
         }
 
         [HttpGet("Postcode")]
