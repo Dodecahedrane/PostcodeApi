@@ -20,7 +20,7 @@ namespace PublicApi.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok("The Web App Is Working!");
+            return Ok("Visit https://github.com/Dodecahedrane/PostcodeApi to learn about this API!");
         }
 
         [HttpGet("Postcode")]
