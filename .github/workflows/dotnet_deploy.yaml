@@ -16,7 +16,7 @@ jobs:
     
     defaults:
       run:
-        working-directory: ./PostcodeApi/PublicApi
+        working-directory: ./PostcodeApi/
 
     steps:
       - uses: actions/checkout@v3
@@ -36,7 +36,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: .net-app
-          path: ./PostcodeApi/PublicApi
+          path: ./PostcodeApi/
     
   test:
     runs-on: windows-latest
@@ -51,7 +51,7 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v3
       with:
-        dotnet-version: 7.0.x
+        dotnet-version: 7.x
 
     - name: Restore dependencies
       run: dotnet restore
@@ -83,5 +83,6 @@ jobs:
         uses: azure/webapps-deploy@v2
         with:
           app-name: 'PostcodeApiWebApp'
+          slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE }}
           package: .
