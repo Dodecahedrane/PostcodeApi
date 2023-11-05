@@ -4,6 +4,7 @@ using CsvHelper;
 using PublicApi;
 using CsvHelper.Configuration;
 using System.Reflection.PortableExecutable;
+using Microsoft.AspNetCore.Routing.Constraints;
 
 namespace PublicApi.Controllers
 {
@@ -70,7 +71,7 @@ namespace PublicApi.Controllers
         [HttpGet("PartialPostcode")]
         public IActionResult GetPartialPostcode([FromBody] PostcodeInputModel input)
         {
-            string partialPostcode = input.Postcode;
+            string partialPostcode = PostcodeValidator.PostcodeFormatter(input.Postcode);
 
             if (partialPostcode == null)
             {
@@ -83,7 +84,7 @@ namespace PublicApi.Controllers
                     .Where(record => record.Postcode.Contains(partialPostcode))
                     .ToList();
 
-                if (result != null)
+                if (result.Count() > 0)
                 {
                     return Ok(result);
                 }
