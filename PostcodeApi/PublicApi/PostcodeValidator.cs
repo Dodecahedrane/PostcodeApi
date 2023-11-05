@@ -7,7 +7,7 @@ namespace PublicApi
         public static string IsPostcodeValid(string postcode)
         {
             // Remove all whitespace
-            postcode = postcode.Replace(" ", "");
+            postcode = postcode.Replace(" ", "").ToUpper();
 
             // Regex does not check for length
             if (postcode.Length > 7)
