@@ -81,4 +81,4 @@ jobs:
           app-name: 'Postcode'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_6C4862C213754ADEAEFC87646EF90B9F }}
-          package: .
+          package: ./PostcodeApi/PublicApi
