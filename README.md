@@ -71,6 +71,7 @@ Current End Point: [https://postcode.azurewebsites.net/](https://postcode.azurew
 
 ## TODO
 
+- [ ] Build Instructions
 - [ ] Unit Tests for CsvLoader
 - [ ] Unit Tests for Postcode Controller
 - [ ] Postman End Point Tests
