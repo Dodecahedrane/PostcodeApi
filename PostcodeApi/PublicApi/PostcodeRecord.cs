@@ -5,7 +5,13 @@ namespace PublicApi
     public class PostcodeRecord
     {
         [Name("pcd")]
-        public required string Postcode { get; set; }
+        public string Postcode
+        {
+            get => _postcode;
+            set => _postcode = value.Replace(" ", string.Empty);
+        }
+
+        private string? _postcode;
 
         [Name("lat")]
         public required double Latitude { get; set; }
