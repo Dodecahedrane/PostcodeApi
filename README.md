@@ -25,6 +25,8 @@ Current End Point: [https://postcode.azurewebsites.net/](https://postcode.azurew
     - The body is null  
     - The format of the body is incorrect
     - The postcode is invalid
+  - Status: 500
+    - Server Error
 
 ### GET /AllPostcodes
 - Returns all postcodes and their details within the dataset, no request body needed.
