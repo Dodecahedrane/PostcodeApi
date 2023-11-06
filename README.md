@@ -14,7 +14,7 @@ Current End Point: [https://postcode.azurewebsites.net/](https://postcode.azurew
 
 - Response: 
   - Status: 200
-  - Body: `{
+    - Body: `{
     "postcode": "PL48AA",
     "latitude": 50.375438,
     "longitude": -4.13794
@@ -33,7 +33,7 @@ Current End Point: [https://postcode.azurewebsites.net/](https://postcode.azurew
 
 - Response: 
   - Status: 200
-  - Body: Returns full list of all postcodes (~2.5M approx.) Format same as above, but in JSON array
+    - Body: Returns full list of all postcodes (~2.5M approx.) Format same as above, but in JSON array
   - Status: 500
     - Server Error
 
@@ -47,7 +47,7 @@ Current End Point: [https://postcode.azurewebsites.net/](https://postcode.azurew
 
 - Response: 
   - Status: 200
-  - Body: Body: 
+    - Body: Body: 
 `[
     {
         "postcode": "PL48AA",
