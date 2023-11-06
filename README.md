@@ -5,6 +5,14 @@ Current End Point: [https://postcode.azurewebsites.net/](https://postcode.azurew
 
 **NOTE: This is running on a free tier Azure Web App instance, this is limited to 60 minuites of use per month. So it could stop working at any point. Secondly, as this instance type is not persistent (ie, after each request, it waits a few seconds before shutting down the server). Every time a request is made, and the server is not already online, the first request will take some time to run as the CSV data file is loaded into memory. Subsequent requests will be much quicker, of cource limtied to the shutdown wait time.**
 
+## The Dataset
+
+The data source is the [ONS Postcode Directory](https://geoportal.statistics.gov.uk/datasets/ons::ons-postcode-directory-august-2023/about). It has been modified to remove everything apart from Postcode, Latitude and Longitude.
+
+
+More data will be added as this project is developed. 
+
+
 ## Get Methods
 
 ### GET /Postcode
