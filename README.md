@@ -63,8 +63,8 @@ Current End Point: [https://postcode.azurewebsites.net/](https://postcode.azurew
 ]`
 - Status: 404 No Matches Found
     - The submitted partial postcode does not have any matches within the dataset   
-  - Status: 400 Bad Request
-    - The body is null  
-    - The format of the body is incorrect
-  - Status: 500
-    - Server Error
+- Status: 400 Bad Request
+  - The body is null  
+  - The format of the body is incorrect
+- Status: 500
+  - Server Error
