@@ -98,10 +98,6 @@ namespace PublicApi.Controllers
                     return NotFound($"No partial matches for {partialPostcode} found.");
                 }
             }
-            catch (InvalidPostcode ex)
-            {
-                return BadRequest(ex.Message);
-            }
             catch
             {
                 return StatusCode(500, $"An error occurred");
