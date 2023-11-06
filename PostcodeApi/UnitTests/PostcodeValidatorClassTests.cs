@@ -2,7 +2,7 @@ using static PublicApi.PostcodeValidator;
 
 namespace UnitTests
 {
-    public class Tests
+    public class PostcodeValidatorTests
     {
         [SetUp]
         public void Setup()
