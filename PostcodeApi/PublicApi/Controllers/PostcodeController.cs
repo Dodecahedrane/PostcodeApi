@@ -5,6 +5,7 @@ using PublicApi;
 using CsvHelper.Configuration;
 using System.Reflection.PortableExecutable;
 using Microsoft.AspNetCore.Routing.Constraints;
+using static PublicApi.PostcodeValidator;
 
 namespace PublicApi.Controllers
 {
@@ -49,9 +50,13 @@ namespace PublicApi.Controllers
                     return NotFound($"Postcode {postcode} not found.");
                 }
             }
-            catch (Exception ex)
+            catch (InvalidPostcode ex)
             {
-                return BadRequest($"An error occurred: {ex.Message}");
+                return BadRequest(ex.Message);
+            }
+            catch
+            {
+                return StatusCode(500, $"An error occurred");
             }
         }
 
@@ -64,7 +69,7 @@ namespace PublicApi.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest($"An error occurred: {ex.Message}");
+                return StatusCode(500, $"An error occurred: {ex.Message}");
             }
         }
 
@@ -93,9 +98,13 @@ namespace PublicApi.Controllers
                     return NotFound($"No partial matches for {partialPostcode} found.");
                 }
             }
-            catch (Exception ex)
+            catch (InvalidPostcode ex)
             {
-                return BadRequest($"An error occurred: {ex.Message}");
+                return BadRequest(ex.Message);
+            }
+            catch
+            {
+                return StatusCode(500, $"An error occurred");
             }
         }
     }
