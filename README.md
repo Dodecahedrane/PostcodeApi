@@ -18,7 +18,13 @@ Current End Point: [https://postcode.azurewebsites.net/](https://postcode.azurew
     "postcode": "PL48AA",
     "latitude": 50.375438,
     "longitude": -4.13794
-}`
+  }`
+  - Status: 404 Postcode Not Found
+    - The submitted postcode does not exist within the dataset   
+  - Status: 400 Bad Request
+    - The body is null  
+    - The format of the body is incorrect
+    - The postcode is invalid
 
 ### GET /AllPostcodes
 - Returns all postcodes and their details within the dataset, no request body needed.
@@ -26,6 +32,8 @@ Current End Point: [https://postcode.azurewebsites.net/](https://postcode.azurew
 - Response: 
   - Status: 200
   - Body: Returns full list of all postcodes (~2.5M approx.) Format same as above, but in JSON array
+  - Status: 500
+    - Server Error
 
 ### GET /PartialPostcode
 - Matches a partial postcode
@@ -51,3 +59,10 @@ Current End Point: [https://postcode.azurewebsites.net/](https://postcode.azurew
     },
     {.............
 ]`
+- Status: 404 No Matches Found
+    - The submitted partial postcode does not have any matches within the dataset   
+  - Status: 400 Bad Request
+    - The body is null  
+    - The format of the body is incorrect
+  - Status: 500
+    - Server Error
