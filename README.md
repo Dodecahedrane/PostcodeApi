@@ -12,9 +12,9 @@ Request Body:
   "postcode": "PL4 8AA"
 }`
 
-Response:
-Status: 200
-Body: 
+#### Response: 
+##### Status: 200
+##### Body:
 `{
     "postcode": "PL48AA",
     "latitude": 50.375438,
@@ -24,8 +24,9 @@ Body:
 ### GET /AllPostcodes
 - Returns all postcodes and their details within the dataset, no request body needed.
 
-#### Response: 200
-#### Body: Returns full list of all postcodes (~2.5M approx.) Format same as above, but in JSON array
+#### Response: 
+##### Status: 200
+##### Body: Returns full list of all postcodes (~2.5M approx.) Format same as above, but in JSON array
 
 ### GET /PartialPostcode
 - Matches a partial postcode
@@ -36,8 +37,8 @@ Body:
 }`
 
 #### Response:
-#### Status: 200
-#### Body: 
+##### Status: 200
+##### Body: 
 `[
     {
         "postcode": "PL48AA",
