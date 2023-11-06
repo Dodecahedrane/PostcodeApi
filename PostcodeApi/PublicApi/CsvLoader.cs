@@ -15,7 +15,7 @@ namespace PublicApi
             Records = GetRecords();
         }
 
-        private List<PostcodeRecord> GetRecords()
+        private static List<PostcodeRecord> GetRecords()
         {
             try
             {

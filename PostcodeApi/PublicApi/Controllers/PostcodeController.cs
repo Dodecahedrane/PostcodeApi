@@ -84,7 +84,7 @@ namespace PublicApi.Controllers
                     .Where(record => record.Postcode.Contains(partialPostcode))
                     .ToList();
 
-                if (result.Count() > 0)
+                if (result.Count > 0)
                 {
                     return Ok(result);
                 }
