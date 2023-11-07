@@ -14,7 +14,7 @@ namespace UnitTests
         }
 
         [Test]
-        public void CsvLoader()
+        public void PostcodeLoader()
         {
             // Static File URL fails this test as its running in the UnitTests proj instead. 
             // TODO Fix this with a restructure of the CsvLoader class?
@@ -23,7 +23,7 @@ namespace UnitTests
 
             try
             {
-                CsvLoader c = new();
+                PostcodeLoader postcodeLoader = new();
             }
             catch (FailedToLoadPostcodeData)
             {

@@ -12,11 +12,11 @@ namespace PostcodeApi.Controllers
     [Route("")]
     public class PostcodeController : Controller
     {
-        private readonly CsvLoader _csvLoader;
+        private readonly PostcodeLoader _postcodeLoader;
 
-        public PostcodeController(CsvLoader csvLoader)
+        public PostcodeController(PostcodeLoader postcodeLoader)
         {
-            _csvLoader = csvLoader;
+            _postcodeLoader = postcodeLoader;
         }
 
         [HttpGet]
@@ -37,7 +37,7 @@ namespace PostcodeApi.Controllers
 
             try
             {
-                PostcodeRecord? result = _csvLoader.Records.FirstOrDefault(
+                PostcodeRecord? result = _postcodeLoader.Records.FirstOrDefault(
                     x => x.Postcode == PostcodeValidator.IsPostcodeValid(postcode)
                     );
                 
@@ -65,7 +65,7 @@ namespace PostcodeApi.Controllers
         {
             try
             {
-                return Ok(_csvLoader.Records);
+                return Ok(_postcodeLoader.Records);
             }
             catch (Exception ex)
             {
@@ -85,7 +85,7 @@ namespace PostcodeApi.Controllers
 
             try
             {
-                List<PostcodeRecord> result = _csvLoader.Records
+                List<PostcodeRecord> result = _postcodeLoader.Records
                     .Where(record => record.Postcode.Contains(partialPostcode))
                     .ToList();
 
