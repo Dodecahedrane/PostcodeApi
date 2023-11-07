@@ -24,7 +24,7 @@ namespace PostcodeApi.Controllers
         {
             string postcode = input.Postcode;
 
-            if (postcode == null)
+            if (postcode == "")
             {
                 return BadRequest($"Postcode URL Parameter is Null");
             }
@@ -74,7 +74,7 @@ namespace PostcodeApi.Controllers
         {
             string partialPostcode = PostcodeHelper.PostcodeFormatter(input.Postcode);
 
-            if (partialPostcode == null)
+            if (partialPostcode == "")
             {
                 return BadRequest($"Postcode URL Parameter is Null");
             }
