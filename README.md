@@ -7,7 +7,7 @@ Current End Point: [https://postcode.azurewebsites.net/](https://postcode.azurew
 
 ## The Dataset
 
-The data source is the [ONS Postcode Directory](https://geoportal.statistics.gov.uk/datasets/ons::ons-postcode-directory-august-2023/about). It has been modified to remove everything apart from Postcode, Latitude and Longitude.
+The data source is the [ONS Postcode Directory](https://geoportal.statistics.gov.uk/datasets/ons::ons-postcode-directory-august-2023/about). It has been modified to remove everything apart from Postcode, Latitude and Longitude. This is under the [Open Government Licence](https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/)
 
 
 More data will be added as this project is developed. 
