@@ -1,8 +1,6 @@
 # PostcodeApi
 
 Current End Point: [https://postcode.azurewebsites.net/](https://postcode.azurewebsites.net/)
-[Swagger Documentation](https://postcode.azurewebsites.net/swagger/index.html)
-
 
 **NOTE: This is running on a free tier Azure Web App instance, this is limited to 60 minuites of use per month. So it could stop working at any point. Secondly, as this instance type is not persistent (ie, after each request, it waits a few seconds before shutting down the server). Every time a request is made, and the server is not already online, the first request will take some time to run as the CSV data file is loaded into memory. Subsequent requests will be much quicker, of course limtied to the shutdown wait time.**
 
@@ -16,7 +14,7 @@ More data will be added as this project is developed.
 
 ## API Documentation
 
-** [Swagger Documentation](https://postcode.azurewebsites.net/swagger/index.html) **
+**[Swagger Documentation](https://postcode.azurewebsites.net/swagger/index.html)**
 
 ### GET /Postcode
 - Returns details of Postcode provided in body, if it exists
