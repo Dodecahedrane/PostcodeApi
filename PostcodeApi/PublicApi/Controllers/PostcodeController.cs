@@ -19,14 +19,8 @@ namespace PostcodeApi.Controllers
             _postcodeLoader = postcodeLoader;
         }
 
-        [HttpGet]
-        public IActionResult Get()
-        {
-            return Ok("Visit https://github.com/Dodecahedrane/PublicApi to learn about this API!");
-        }
-
         [HttpGet("Postcode")]
-        public IActionResult GetPostcodeLatLong([FromBody] PostcodeInputModel input)
+        public IActionResult GetPostcode([FromQuery] PostcodeInputModel input)
         {
             string postcode = input.Postcode;
 
@@ -45,7 +39,7 @@ namespace PostcodeApi.Controllers
                 PostcodeRecord? result = _postcodeLoader.Records.FirstOrDefault(
                     x => x.Postcode == postcode
                     );
-                
+
                 if (result != null)
                 {
                     return Ok(result);
@@ -61,8 +55,8 @@ namespace PostcodeApi.Controllers
             }
         }
 
-        [HttpGet("AllPostcodes")]
-        public IActionResult GetAllPostcodes()
+        [HttpGet("Postcode")]
+        public IActionResult GetAllPostcode()
         {
             try
             {
@@ -74,8 +68,9 @@ namespace PostcodeApi.Controllers
             }
         }
 
+
         [HttpGet("PartialPostcode")]
-        public IActionResult GetPartialPostcode([FromBody] PostcodeInputModel input)
+        public IActionResult GetPartialPostcode([FromQuery] PostcodeInputModel input)
         {
             string partialPostcode = PostcodeHelper.PostcodeFormatter(input.Postcode);
 
