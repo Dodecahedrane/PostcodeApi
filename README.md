@@ -61,9 +61,7 @@ More data will be added as this project is developed.
 
 ### GET /PartialPostcode
 - Matches a partial postcode
-
 - URL Parmeter: `postcode`
-
 - Response: 
   - Status: 200
     - Body: 
