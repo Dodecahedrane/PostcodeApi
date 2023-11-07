@@ -16,7 +16,7 @@ jobs:
     
     defaults:
       run:
-        working-directory: ./PostcodeApi/PublicApi
+        working-directory: ./PostcodeApi/PublicApi/
 
     steps:
       - uses: actions/checkout@v3
