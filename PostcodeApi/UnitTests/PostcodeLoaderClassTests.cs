@@ -18,7 +18,7 @@ namespace UnitTests
         }
 
         [Test]
-        public void PostcodeLoader()
+        public void PostcodeLoaderSuccess()
         {
             try
             {
@@ -30,6 +30,12 @@ namespace UnitTests
             }
 
             Assert.Pass();
-        }    
+        }
+
+        [Test]
+        public void PostcodeLoaderFail()
+        {
+            Assert.Throws<FailedToLoadPostcodeData>(() => new PostcodeLoader("Non Existant Path"));
+        }
     }
 }
