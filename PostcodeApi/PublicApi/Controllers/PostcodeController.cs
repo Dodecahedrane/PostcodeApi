@@ -35,10 +35,15 @@ namespace PostcodeApi.Controllers
                 return BadRequest($"Postcode URL Parameter is Null");
             }
 
+            if (!PostcodeHelper.IsPostcodeValid(postcode))
+            {
+                return BadRequest("Invalid Postcode");
+            }
+
             try
             {
                 PostcodeRecord? result = _postcodeLoader.Records.FirstOrDefault(
-                    x => x.Postcode == PostcodeHelper.IsPostcodeValid(postcode)
+                    x => x.Postcode == postcode
                     );
                 
                 if (result != null)
@@ -49,10 +54,6 @@ namespace PostcodeApi.Controllers
                 {
                     return NotFound($"Postcode {postcode} not found.");
                 }
-            }
-            catch (InvalidPostcode ex)
-            {
-                return BadRequest(ex.Message);
             }
             catch
             {

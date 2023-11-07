@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace UnitTests
 {
-    public class CsvLoaderClassTests
+    public class PostcodeLoaderClassTests
     {
         [SetUp]
         public void Setup()

@@ -53,15 +53,7 @@ namespace UnitTests
 
             foreach (var kvp in testCases)
             {
-                bool valid = true;
-                try
-                {
-                    string postcode = PostcodeHelper.IsPostcodeValid(kvp.Key);
-                }
-                catch (InvalidPostcode)
-                {
-                    valid = false;
-                }
+                bool valid = PostcodeHelper.IsPostcodeValid(PostcodeHelper.PostcodeFormatter(kvp.Key)); ;
 
                 if (kvp.Value != valid)
                 {

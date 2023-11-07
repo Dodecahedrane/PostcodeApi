@@ -2,17 +2,14 @@
 
 namespace PostcodeApi
 {
-    public class PostcodeValidator
+    public class PostcodeHelper
     {
-        public static string IsPostcodeValid(string postcode)
+        public static bool IsPostcodeValid(string postcode)
         {
-            // Remove all whitespace
-            postcode = PostcodeFormatter(postcode);
-
             // Regex does not check for length
             if (postcode.Length > 7)
             {
-                throw new InvalidPostcode($"This Postcode Is Not Valid! {postcode}");
+                return false;
             }
 
             // Regex to match a postcode
@@ -20,28 +17,12 @@ namespace PostcodeApi
             
             bool isValid = Regex.IsMatch(postcode, pattern);
 
-            if (isValid)
-            {
-                return postcode;
-            }
-            else
-            {
-                throw new InvalidPostcode($"This Postcode Is Not Valid! {postcode}");
-            }
+            return isValid;
         }
 
         public static string PostcodeFormatter(string postcode)
         {
             return postcode.Replace(" ", "").ToUpper();
-        }
-
-        public class InvalidPostcode : Exception
-        {
-            public InvalidPostcode() { }
-
-            public InvalidPostcode(string message) : base(message) { }
-
-            public InvalidPostcode(string message, Exception innerException) : base(message, innerException) { }
         }
     }
 }
