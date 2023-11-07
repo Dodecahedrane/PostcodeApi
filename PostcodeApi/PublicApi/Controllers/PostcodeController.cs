@@ -5,7 +5,7 @@ using PostcodeApi;
 using CsvHelper.Configuration;
 using System.Reflection.PortableExecutable;
 using Microsoft.AspNetCore.Routing.Constraints;
-using static PostcodeApi.PostcodeValidator;
+using static PostcodeApi.PostcodeHelper;
 
 namespace PostcodeApi.Controllers
 {
@@ -38,7 +38,7 @@ namespace PostcodeApi.Controllers
             try
             {
                 PostcodeRecord? result = _postcodeLoader.Records.FirstOrDefault(
-                    x => x.Postcode == PostcodeValidator.IsPostcodeValid(postcode)
+                    x => x.Postcode == PostcodeHelper.IsPostcodeValid(postcode)
                     );
                 
                 if (result != null)
@@ -76,7 +76,7 @@ namespace PostcodeApi.Controllers
         [HttpGet("PartialPostcode")]
         public IActionResult GetPartialPostcode([FromBody] PostcodeInputModel input)
         {
-            string partialPostcode = PostcodeValidator.PostcodeFormatter(input.Postcode);
+            string partialPostcode = PostcodeHelper.PostcodeFormatter(input.Postcode);
 
             if (partialPostcode == null)
             {

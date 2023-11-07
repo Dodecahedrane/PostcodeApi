@@ -1,4 +1,4 @@
-using static PostcodeApi.PostcodeValidator;
+using static PostcodeApi.PostcodeHelper;
 
 namespace UnitTests
 {
@@ -26,7 +26,7 @@ namespace UnitTests
 
             foreach (var kvp in testCases)
             {
-                if (PostcodeValidator.PostcodeFormatter(kvp.Key) != kvp.Value)
+                if (PostcodeHelper.PostcodeFormatter(kvp.Key) != kvp.Value)
                 {
                     Assert.Fail($"Postcode Formatter Not Formatting {kvp.Value} to {kvp.Key} Correctly");
                 }
@@ -56,7 +56,7 @@ namespace UnitTests
                 bool valid = true;
                 try
                 {
-                    string postcode = PostcodeValidator.IsPostcodeValid(kvp.Key);
+                    string postcode = PostcodeHelper.IsPostcodeValid(kvp.Key);
                 }
                 catch (InvalidPostcode)
                 {
