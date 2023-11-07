@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,6 +9,9 @@ namespace UnitTests
 {
     public class PostcodeLoaderClassTests
     {
+        // Path to CSV
+        const string path = "..\\..\\..\\..\\PublicApi\\wwwroot\\Data\\PostcodesLatLong.csv";
+
         [SetUp]
         public void Setup()
         {
@@ -16,23 +20,16 @@ namespace UnitTests
         [Test]
         public void PostcodeLoader()
         {
-            // Static File URL fails this test as its running in the UnitTests proj instead. 
-            // TODO Fix this with a restructure of the CsvLoader class?
-
-            Assert.Pass();
-
             try
             {
-                PostcodeLoader postcodeLoader = new();
+                PostcodeLoader postcodeLoader = new PostcodeLoader(path);
             }
             catch (FailedToLoadPostcodeData)
             {
-                Assert.Fail();
+                Assert.Fail("Failed To Load Postcode Data Exception");
             }
 
             Assert.Pass();
-            
-        }
-    
+        }    
     }
 }

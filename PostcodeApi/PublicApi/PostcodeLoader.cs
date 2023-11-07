@@ -4,23 +4,20 @@ using System.Globalization;
 
 namespace PostcodeApi
 {
-    public class PostcodeLoader
+    public class PostcodeLoader : IPostcodeLoader
     {
-        // TODO Move this to an env variable
-        private const string CsvFilePath = "wwwroot\\Data\\PostcodesLatLong.csv";
-
         public HashSet<PostcodeRecord> Records { get; private set; }
 
-        public PostcodeLoader() 
+        public PostcodeLoader(string path) 
         {
-            Records = GetPostcodes();
+            Records = GetPostcodes(path);
         }
 
-        private static HashSet<PostcodeRecord> GetPostcodes()
+        private static HashSet<PostcodeRecord> GetPostcodes(string path)
         {
             try
             {
-                using var reader = new StreamReader(CsvFilePath);
+                using var reader = new StreamReader(path);
                 using var csv = new CsvReader(reader, new CsvConfiguration(CultureInfo.InvariantCulture));
                 return csv.GetRecords<PostcodeRecord>().ToHashSet();
             }
@@ -31,6 +28,10 @@ namespace PostcodeApi
         }
     }
 
+    public interface IPostcodeLoader
+    {
+        HashSet<PostcodeRecord> Records { get; }
+    }
 
     public class FailedToLoadPostcodeData : Exception
     {
