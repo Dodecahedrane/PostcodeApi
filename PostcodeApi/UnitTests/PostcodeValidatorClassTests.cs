@@ -1,4 +1,4 @@
-using static PublicApi.PostcodeValidator;
+using static PostcodeApi.PostcodeValidator;
 
 namespace UnitTests
 {

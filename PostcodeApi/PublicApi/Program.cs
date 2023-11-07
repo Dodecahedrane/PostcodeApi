@@ -1,4 +1,4 @@
-using PublicApi;
+using PostcodeApi;
 
 var builder = WebApplication.CreateBuilder(args);
 

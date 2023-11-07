@@ -2,7 +2,7 @@
 using CsvHelper;
 using System.Globalization;
 
-namespace PublicApi
+namespace PostcodeApi
 {
     public class CsvLoader
     {

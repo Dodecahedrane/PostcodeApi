@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace PublicApi
+namespace PostcodeApi
 {
     public class PostcodeInputModel
     {

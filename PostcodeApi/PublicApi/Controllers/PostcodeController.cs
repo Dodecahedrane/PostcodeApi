@@ -1,13 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Globalization;
 using CsvHelper;
-using PublicApi;
+using PostcodeApi;
 using CsvHelper.Configuration;
 using System.Reflection.PortableExecutable;
 using Microsoft.AspNetCore.Routing.Constraints;
-using static PublicApi.PostcodeValidator;
+using static PostcodeApi.PostcodeValidator;
 
-namespace PublicApi.Controllers
+namespace PostcodeApi.Controllers
 {
     [Route("")]
     public class PostcodeController : Controller
@@ -22,7 +22,7 @@ namespace PublicApi.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok("Visit https://github.com/Dodecahedrane/PostcodeApi to learn about this API!");
+            return Ok("Visit https://github.com/Dodecahedrane/PublicApi to learn about this API!");
         }
 
         [HttpGet("Postcode")]

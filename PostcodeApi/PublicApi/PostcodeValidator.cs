@@ -1,6 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace PublicApi
+namespace PostcodeApi
 {
     public class PostcodeValidator
     {

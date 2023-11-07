@@ -1,6 +1,6 @@
 ﻿using CsvHelper.Configuration.Attributes;
 
-namespace PublicApi
+namespace PostcodeApi
 {
     public class PostcodeRecord
     {
