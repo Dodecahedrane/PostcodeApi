@@ -2,7 +2,6 @@
 
 Current End Point: [https://postcode.azurewebsites.net/](https://postcode.azurewebsites.net/)
 
-
 **NOTE: This is running on a free tier Azure Web App instance, this is limited to 60 minuites of use per month. So it could stop working at any point. Secondly, as this instance type is not persistent (ie, after each request, it waits a few seconds before shutting down the server). Every time a request is made, and the server is not already online, the first request will take some time to run as the CSV data file is loaded into memory. Subsequent requests will be much quicker, of course limtied to the shutdown wait time.**
 
 ## The Dataset
@@ -13,15 +12,14 @@ The data source is the [ONS Postcode Directory](https://geoportal.statistics.gov
 More data will be added as this project is developed. 
 
 
-## Get Methods
+## API Documentation
+
+**[Swagger Documentation](https://postcode.azurewebsites.net/swagger/index.html)**
 
 ### GET /Postcode
 - Returns details of Postcode provided in body, if it exists
 
-- Request Body:
-`{
-  "postcode": "PL4 8AA"
-}`
+- URL Parmeter: `postcode`
 
 - Response: 
   - Status: 200
@@ -51,10 +49,7 @@ More data will be added as this project is developed.
 ### GET /PartialPostcode
 - Matches a partial postcode
 
-- Request Body:
-`{
-  "postcode": "PL4 8A"
-}`
+- URL Parmeter: `postcode`
 
 - Response: 
   - Status: 200
@@ -83,6 +78,6 @@ More data will be added as this project is developed.
 ## TODO
 
 - [ ] Build Instructions
-- [ ] Unit Tests for CsvLoader
+- [ ] Unit Tests for PostcodeLoader - This will require a refactor to get the `CsvFilePath` as an enviroment variable instead of having it hard coded
 - [ ] Unit Tests for Postcode Controller
-- [ ] Postman End Point Tests
+- [ ] Postman End Point Integration Tests
