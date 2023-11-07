@@ -43,6 +43,19 @@ More data will be added as this project is developed.
 - Response: 
   - Status: 200
     - Body: Returns full list of all postcodes (~2.5M approx.) Format same as above, but in JSON array
+      `[
+    {
+        "postcode": "PL48AA",
+        "latitude": 50.375438,
+        "longitude": -4.13794
+    },
+    {
+        "postcode": "PL48AB",
+        "latitude": 50.374816,
+        "longitude": -4.137278
+    },
+    {.............
+  ]`
   - Status: 500
     - Server Error
 
@@ -53,7 +66,7 @@ More data will be added as this project is developed.
 
 - Response: 
   - Status: 200
-    - Body: Body: 
+    - Body: 
 `[
     {
         "postcode": "PL48AA",
@@ -78,6 +91,6 @@ More data will be added as this project is developed.
 ## TODO
 
 - [ ] Build Instructions
-- [ ] Unit Tests for PostcodeLoader - This will require a refactor to get the `CsvFilePath` as an enviroment variable instead of having it hard coded
-- [ ] Unit Tests for Postcode Controller
+- [x] Unit Tests for PostcodeLoader - This will require a refactor to get the `CsvFilePath` as an enviroment variable instead of having it hard coded
+- [x] Unit Tests for Postcode Controller
 - [ ] Postman End Point Integration Tests
