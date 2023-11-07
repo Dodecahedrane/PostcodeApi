@@ -5,7 +5,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllers();
 
-//Add CsvLoader
+//Add Postcode Loader
+// TODO Get this from appsetting.json
 builder.Services.AddSingleton(new PostcodeLoader("wwwroot\\Data\\PostcodesLatLong.csv"));
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
