@@ -19,7 +19,8 @@ namespace UnitTests
                 ["Ba111Aa"] = "BA111AA",
                 ["BA20 1AA"] = "BA201AA",
                 ["BN4 5HD"] = "BN45HD",
-                ["bN4 5hd"] = "BN45HD"
+                ["bN4 5hd"] = "BN45HD",
+                ["bN45hd"] = "BN45HD"
             };
 
 
