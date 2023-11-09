@@ -2,7 +2,7 @@
 
 Current End Point: [https://postcode.azurewebsites.net/](https://postcode.azurewebsites.net/)
 
-**NOTE: This is running on a free tier Azure Web App instance, this is limited to 60 minuites of use per month. So it could stop working at any point. Secondly, as this instance type is not persistent (ie, after each request, it waits a few seconds before shutting down the server). Every time a request is made, and the server is not already online, the first request will take some time to run as the CSV data file is loaded into memory. Subsequent requests will be much quicker, of course limtied to the shutdown wait time.**
+**NOTE: This is running on a free tier Azure Web App instance, this is limited to 60 CPU minuites per day. So it could stop working at any point. Secondly, as this instance type is not persistent (ie, after each request, it waits a few seconds before shutting down the server). Every time a request is made, and the server is not already online, the first request will take some time to run as the CSV data file is loaded into memory. Subsequent requests will be much quicker, of course limtied to the shutdown wait time.**
 
 ## The Dataset
 
@@ -43,17 +43,28 @@ More data will be added as this project is developed.
 - Response: 
   - Status: 200
     - Body: Returns full list of all postcodes (~2.5M approx.) Format same as above, but in JSON array
+      `[
+    {
+        "postcode": "PL48AA",
+        "latitude": 50.375438,
+        "longitude": -4.13794
+    },
+    {
+        "postcode": "PL48AB",
+        "latitude": 50.374816,
+        "longitude": -4.137278
+    },
+    {.............
+  ]`
   - Status: 500
     - Server Error
 
 ### GET /PartialPostcode
 - Matches a partial postcode
-
 - URL Parmeter: `postcode`
-
 - Response: 
   - Status: 200
-    - Body: Body: 
+    - Body: 
 `[
     {
         "postcode": "PL48AA",
@@ -78,6 +89,6 @@ More data will be added as this project is developed.
 ## TODO
 
 - [ ] Build Instructions
-- [ ] Unit Tests for PostcodeLoader - This will require a refactor to get the `CsvFilePath` as an enviroment variable instead of having it hard coded
-- [ ] Unit Tests for Postcode Controller
+- [x] Unit Tests for PostcodeLoader - This will require a refactor to get the `CsvFilePath` as an enviroment variable instead of having it hard coded
+- [x] Unit Tests for Postcode Controller
 - [ ] Postman End Point Integration Tests
