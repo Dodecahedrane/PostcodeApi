@@ -17,7 +17,7 @@ namespace UnitTests
         public void Setup()
         {
             const string path = "..\\..\\..\\..\\PublicApi\\wwwroot\\Data\\PostcodesLatLong.csv";
-            PostcodeLoader loader = new PostcodeLoader(path);
+            PostcodeLoader loader = new(path);
             _controller = new PostcodeController(loader);
         }
 
@@ -26,7 +26,7 @@ namespace UnitTests
         {
             var result = _controller.GetPostcode(new PostcodeInputModel { Postcode = "PL48AA" });
 
-            Assert.IsInstanceOf<OkObjectResult>(result);
+            Assert.That(result, Is.InstanceOf<OkObjectResult>());
         }
 
         [Test]
@@ -34,7 +34,7 @@ namespace UnitTests
         {
             var result = _controller.GetPostcode(new PostcodeInputModel { Postcode = "ABC" });
 
-            Assert.IsInstanceOf<BadRequestObjectResult>(result);
+            Assert.That(result, Is.InstanceOf<BadRequestObjectResult>());
         }
 
         [Test]
@@ -42,7 +42,7 @@ namespace UnitTests
         {
             var result = _controller.GetPostcode(new PostcodeInputModel { Postcode = "" });
 
-            Assert.IsInstanceOf<BadRequestObjectResult>(result);
+            Assert.That(result, Is.InstanceOf<BadRequestObjectResult>());
         }
 
         [Test]
@@ -50,7 +50,7 @@ namespace UnitTests
         {
             var result = _controller.GetPostcode(new PostcodeInputModel { Postcode = "ZZ999ZZ" });
 
-            Assert.IsInstanceOf<NotFoundObjectResult>(result);
+            Assert.That(result, Is.InstanceOf<NotFoundObjectResult>());
         }
 
         [Test]
@@ -58,7 +58,7 @@ namespace UnitTests
         {
             var result = _controller.GetAllPostcode();
 
-            Assert.IsInstanceOf<OkObjectResult>(result);
+            Assert.That(result, Is.InstanceOf<OkObjectResult>());
         }
 
         [Test]
@@ -66,7 +66,7 @@ namespace UnitTests
         {
             var result = _controller.GetPartialPostcode(new PostcodeInputModel { Postcode = "PL4" });
 
-            Assert.IsInstanceOf<OkObjectResult>(result);
+            Assert.That(result, Is.InstanceOf<OkObjectResult>());
         }
 
         [Test]
@@ -74,7 +74,7 @@ namespace UnitTests
         {
             var result = _controller.GetPartialPostcode(new PostcodeInputModel { Postcode = "" });
 
-            Assert.IsInstanceOf<BadRequestObjectResult>(result);
+            Assert.That(result, Is.InstanceOf<BadRequestObjectResult>());
         }
 
         [Test]
@@ -82,7 +82,7 @@ namespace UnitTests
         {
             var result = _controller.GetPartialPostcode(new PostcodeInputModel { Postcode = "ZZ999" });
 
-            Assert.IsInstanceOf<NotFoundObjectResult>(result);
+            Assert.That(result, Is.InstanceOf<NotFoundObjectResult>());
         }
     }
 }
