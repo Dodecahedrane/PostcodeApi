@@ -92,3 +92,4 @@ More data will be added as this project is developed.
 - [x] Unit Tests for PostcodeLoader - This will require a refactor to get the `CsvFilePath` as an enviroment variable instead of having it hard coded
 - [x] Unit Tests for Postcode Controller
 - [ ] Postman End Point Integration Tests
+- [ ] Docker Container
