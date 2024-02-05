@@ -30,6 +30,14 @@ namespace UnitTests
         }
 
         [Test]
+        public void GetPostcodeOk()
+        {
+            var result = _controller.GetPostcode(new PostcodeInputModel { Postcode = "pl48aa" });
+
+            Assert.That(result, Is.InstanceOf<OkObjectResult>());
+        }
+
+        [Test]
         public void GetPostcodeBadRequestInvalidPostcode()
         {
             var result = _controller.GetPostcode(new PostcodeInputModel { Postcode = "ABC" });
