@@ -22,7 +22,7 @@ namespace PostcodeApi.Controllers
         [HttpGet("Postcode")]
         public IActionResult GetPostcode([FromQuery] PostcodeInputModel input)
         {
-            string postcode = input.Postcode;
+            string postcode = PostcodeHelper.PostcodeFormatter(input.Postcode);
 
             if (postcode == "")
             {
