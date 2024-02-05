@@ -22,7 +22,7 @@ namespace UnitTests
         }
 
         [Test]
-        public void GetPostcodeOk()
+        public void GetPostcodeUppercaseOk()
         {
             var result = _controller.GetPostcode(new PostcodeInputModel { Postcode = "PL48AA" });
 
@@ -30,7 +30,7 @@ namespace UnitTests
         }
 
         [Test]
-        public void GetPostcodeOk()
+        public void GetPostcodeLowercaseOk()
         {
             var result = _controller.GetPostcode(new PostcodeInputModel { Postcode = "pl48aa" });
 
