@@ -12,17 +12,17 @@ env:
 
 jobs:
   build:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     
     defaults:
       run:
         working-directory: ./PostcodeApi/PublicApi/
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Set up .NET Core
-        uses: actions/setup-dotnet@v3
+        uses: actions/setup-dotnet@v4
         with:
           dotnet-version: 7.x
 
@@ -33,7 +33,7 @@ jobs:
         run: dotnet publish -c Release -o ./PostcodeApi/PublicApi
 
       - name: Upload artifact for deployment job
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: .net-app
           path: ./PostcodeApi/PublicApi
@@ -47,9 +47,9 @@ jobs:
         working-directory: ./PostcodeApi/
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - name: Setup .NET
-      uses: actions/setup-dotnet@v3
+      uses: actions/setup-dotnet@v4
       with:
         dotnet-version: 7.x
 
@@ -61,7 +61,7 @@ jobs:
       run: dotnet test --no-build --verbosity normal
 
   deploy:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     needs: test
 
     environment:
@@ -76,7 +76,7 @@ jobs:
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
-        uses: azure/webapps-deploy@v2
+        uses: azure/webapps-deploy@v4
         with:
           app-name: 'Postcode'
           slot-name: 'Production'

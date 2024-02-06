@@ -32,7 +32,7 @@ More data will be added as this project is developed.
     - The submitted postcode does not exist within the dataset   
   - Status: 400 Bad Request
     - The body is null  
-    - The format of the body is incorrect
+    - The format is incorrect
     - The postcode is invalid
   - Status: 500
     - Server Error
@@ -82,7 +82,19 @@ More data will be added as this project is developed.
     - The submitted partial postcode does not have any matches within the dataset   
 - Status: 400 Bad Request
   - The body is null  
-  - The format of the body is incorrect
+  - The format is incorrect
+- Status: 500
+  - Server Error
+ 
+### GET /ValidatePostcode
+- Retunrs true/false depending on if the postcode is valid or not
+- URL Parmeter: `postcode`
+- Response: 
+  - Status: 200
+    - Body: true/false  
+- Status: 400 Bad Request
+  - The body is null  
+  - The format is incorrect
 - Status: 500
   - Server Error
 
@@ -93,3 +105,4 @@ More data will be added as this project is developed.
 - [x] Unit Tests for Postcode Controller
 - [ ] Postman End Point Integration Tests
 - [ ] Docker Container
+- [x] Valid Postcode Endpoint
