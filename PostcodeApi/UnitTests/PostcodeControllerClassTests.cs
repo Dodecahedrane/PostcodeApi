@@ -92,5 +92,39 @@ namespace UnitTests
 
             Assert.That(result, Is.InstanceOf<NotFoundObjectResult>());
         }
+
+        [Test]
+        public void GetPostcodeValidation()
+        {
+            Dictionary<string, bool> testCases = new()
+            {
+                ["ba211aa"] = true,
+                ["Ba111Aa"] = true,
+                ["BA20 1AA"] = true,
+                ["BN4 5HD"] = true,
+                ["bN4 5hd"] = true,
+                ["bN45hd"] = true,
+                ["aqerrq"] = false,
+                ["1234"] = false,
+
+            };
+
+
+            foreach (var kvp in testCases)
+            {
+                var result = _controller.GetPostcodeValidation(new PostcodeInputModel { Postcode = kvp.Key });
+
+                Assert.That(result, Is.InstanceOf<OkObjectResult>());
+
+                bool resultBool = (bool)((OkObjectResult)result).Value;
+
+                if (resultBool != kvp.Value)
+                {
+                    Assert.Fail($"{kvp.Value} gave the result {resultBool} instead of {kvp.Key}");
+                }
+            }
+
+            Assert.Pass();
+        }
     }
 }

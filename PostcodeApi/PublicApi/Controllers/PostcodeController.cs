@@ -68,6 +68,18 @@ namespace PostcodeApi.Controllers
             }
         }
 
+        [HttpGet("ValidatePostcode")]
+        public IActionResult GetPostcodeValidation([FromQuery] PostcodeInputModel input)
+        {
+            if (!IsPostcodeValid(PostcodeFormatter(input.Postcode)))
+            {
+                return Ok(false);
+            }
+            else
+            {
+                return Ok(true);
+            }
+        } 
 
         [HttpGet("PartialPostcode")]
         public IActionResult GetPartialPostcode([FromQuery] PostcodeInputModel input)
