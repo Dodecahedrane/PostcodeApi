@@ -1,67 +1,66 @@
 using static PostcodeApi.PostcodeHelper;
 
-namespace UnitTests
+namespace UnitTests;
+
+public class PostcodeValidatorTests
 {
-    public class PostcodeValidatorTests
+    [SetUp]
+    public void Setup()
     {
-        [SetUp]
-        public void Setup()
+    }
+
+    [Test]
+    public void PostcodeFormatterTest()
+    {
+
+        Dictionary<string, string> testCases = new()
         {
-        }
+            ["ba211aa"] = "BA211AA",
+            ["Ba111Aa"] = "BA111AA",
+            ["BA20 1AA"] = "BA201AA",
+            ["BN4 5HD"] = "BN45HD",
+            ["bN4 5hd"] = "BN45HD",
+            ["bN45hd"] = "BN45HD"
+        };
 
-        [Test]
-        public void PostcodeFormatterTest()
+
+        foreach (var kvp in testCases)
         {
-
-            Dictionary<string, string> testCases = new()
+            if (PostcodeHelper.PostcodeFormatter(kvp.Key) != kvp.Value)
             {
-                ["ba211aa"] = "BA211AA",
-                ["Ba111Aa"] = "BA111AA",
-                ["BA20 1AA"] = "BA201AA",
-                ["BN4 5HD"] = "BN45HD",
-                ["bN4 5hd"] = "BN45HD",
-                ["bN45hd"] = "BN45HD"
-            };
-
-
-            foreach (var kvp in testCases)
-            {
-                if (PostcodeHelper.PostcodeFormatter(kvp.Key) != kvp.Value)
-                {
-                    Assert.Fail($"Postcode Formatter Not Formatting {kvp.Value} to {kvp.Key} Correctly");
-                }
+                Assert.Fail($"Postcode Formatter Not Formatting {kvp.Value} to {kvp.Key} Correctly");
             }
-
-            Assert.Pass();
         }
 
-        [Test]
-        public void IsPostcodeValid()
+        Assert.Pass();
+    }
+
+    [Test]
+    public void IsPostcodeValid()
+    {
+        Dictionary<string, bool> testCases = new()
         {
-            Dictionary<string, bool> testCases = new()
-            {
-                ["BA491AA"] = true,
-                ["BN3 1PD"] = true,
-                ["BN3 3WE"] = true,
-                ["BS217DB"] = true,
-                ["AA111AA"] = true,
-                ["abcdecg"] = false,
-                ["1234567"] = false,
-                ["       "] = false,
-                ["11AA12"] = false
-            };
+            ["BA491AA"] = true,
+            ["BN3 1PD"] = true,
+            ["BN3 3WE"] = true,
+            ["BS217DB"] = true,
+            ["AA111AA"] = true,
+            ["abcdecg"] = false,
+            ["1234567"] = false,
+            ["       "] = false,
+            ["11AA12"] = false
+        };
 
-            foreach (var kvp in testCases)
-            {
-                bool valid = PostcodeHelper.IsPostcodeValid(PostcodeHelper.PostcodeFormatter(kvp.Key)); ;
+        foreach (var kvp in testCases)
+        {
+            bool valid = PostcodeHelper.IsPostcodeValid(PostcodeHelper.PostcodeFormatter(kvp.Key)); ;
 
-                if (kvp.Value != valid)
-                {
-                    Assert.Fail($"Postcode Validator Incorect For {kvp.Key} giving {valid} instead of {kvp.Value}");
-                }
+            if (kvp.Value != valid)
+            {
+                Assert.Fail($"Postcode Validator Incorect For {kvp.Key} giving {valid} instead of {kvp.Value}");
             }
-
-            Assert.Pass();
         }
+
+        Assert.Pass();
     }
 }

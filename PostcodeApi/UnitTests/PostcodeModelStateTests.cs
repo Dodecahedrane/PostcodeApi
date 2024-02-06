@@ -5,60 +5,59 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace UnitTests
+namespace UnitTests;
+
+public class PartialPostcodeInputModelTests
 {
-    public class PartialPostcodeInputModelTests
+    [Test]
+    public void TestModelStateWithValidPostcode()
     {
-        [Test]
-        public void TestModelStateWithValidPostcode()
+        var model = new PartialPostcodeInputModel
         {
-            var model = new PartialPostcodeInputModel
-            {
-                Postcode = "PL48AA" 
-            };
+            Postcode = "PL48AA" 
+        };
 
-            var validationContext = new ValidationContext(model, serviceProvider: null, items: null);
-            var validationResults = new List<ValidationResult>();
-            var isValid = Validator.TryValidateObject(model, validationContext, validationResults, validateAllProperties: true);
+        var validationContext = new ValidationContext(model, serviceProvider: null, items: null);
+        var validationResults = new List<ValidationResult>();
+        var isValid = Validator.TryValidateObject(model, validationContext, validationResults, validateAllProperties: true);
 
-            Assert.IsTrue(isValid);
-            Assert.IsEmpty(validationResults);
-        }
+        Assert.IsTrue(isValid);
+        Assert.IsEmpty(validationResults);
+    }
 
-        [Test]
-        public void TestModelStateWithNullPostcode()
+    [Test]
+    public void TestModelStateWithNullPostcode()
+    {
+        var model = new PartialPostcodeInputModel
         {
-            var model = new PartialPostcodeInputModel
-            {
-                Postcode = null
-            };
+            Postcode = null
+        };
 
-            var validationContext = new ValidationContext(model, serviceProvider: null, items: null);
-            var validationResults = new List<ValidationResult>();
-            var isValid = Validator.TryValidateObject(model, validationContext, validationResults, validateAllProperties: true);
+        var validationContext = new ValidationContext(model, serviceProvider: null, items: null);
+        var validationResults = new List<ValidationResult>();
+        var isValid = Validator.TryValidateObject(model, validationContext, validationResults, validateAllProperties: true);
 
-            Assert.IsFalse(isValid);
-            Assert.IsNotEmpty(validationResults);
-            Assert.That(validationResults.Count, Is.EqualTo(1));
-            Assert.That(validationResults[0].ErrorMessage, Is.EqualTo("Postcode is Required"));
-        }
+        Assert.IsFalse(isValid);
+        Assert.IsNotEmpty(validationResults);
+        Assert.That(validationResults.Count, Is.EqualTo(1));
+        Assert.That(validationResults[0].ErrorMessage, Is.EqualTo("Postcode is Required"));
+    }
 
-        [Test]
-        public void TestModelStateWithInvalidLengthPostcode()
+    [Test]
+    public void TestModelStateWithInvalidLengthPostcode()
+    {
+        var model = new PartialPostcodeInputModel
         {
-            var model = new PartialPostcodeInputModel
-            {
-                Postcode = "1234567890"
-            };
+            Postcode = "1234567890"
+        };
 
-            var validationContext = new ValidationContext(model, serviceProvider: null, items: null);
-            var validationResults = new List<ValidationResult>();
-            var isValid = Validator.TryValidateObject(model, validationContext, validationResults, validateAllProperties: true);
+        var validationContext = new ValidationContext(model, serviceProvider: null, items: null);
+        var validationResults = new List<ValidationResult>();
+        var isValid = Validator.TryValidateObject(model, validationContext, validationResults, validateAllProperties: true);
 
-            Assert.IsFalse(isValid);
-            Assert.IsNotEmpty(validationResults);
-            Assert.That(validationResults.Count, Is.EqualTo(1));
-            Assert.That(validationResults[0].ErrorMessage, Is.EqualTo("Max Length of 8 Chars"));
-        }
+        Assert.IsFalse(isValid);
+        Assert.IsNotEmpty(validationResults);
+        Assert.That(validationResults.Count, Is.EqualTo(1));
+        Assert.That(validationResults[0].ErrorMessage, Is.EqualTo("Max Length of 8 Chars"));
     }
 }

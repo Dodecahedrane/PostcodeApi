@@ -5,37 +5,36 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace UnitTests
+namespace UnitTests;
+
+public class PostcodeLoaderClassTests
 {
-    public class PostcodeLoaderClassTests
+    // Path to CSV
+    const string path = "..\\..\\..\\..\\PublicApi\\wwwroot\\Data\\PostcodesLatLong.csv";
+
+    [SetUp]
+    public void Setup()
     {
-        // Path to CSV
-        const string path = "..\\..\\..\\..\\PublicApi\\wwwroot\\Data\\PostcodesLatLong.csv";
+    }
 
-        [SetUp]
-        public void Setup()
+    [Test]
+    public void PostcodeLoaderSuccess()
+    {
+        try
         {
+            PostcodeLoader postcodeLoader = new PostcodeLoader(path);
+        }
+        catch (FailedToLoadPostcodeData)
+        {
+            Assert.Fail("Failed To Load Postcode Data Exception");
         }
 
-        [Test]
-        public void PostcodeLoaderSuccess()
-        {
-            try
-            {
-                PostcodeLoader postcodeLoader = new PostcodeLoader(path);
-            }
-            catch (FailedToLoadPostcodeData)
-            {
-                Assert.Fail("Failed To Load Postcode Data Exception");
-            }
+        Assert.Pass();
+    }
 
-            Assert.Pass();
-        }
-
-        [Test]
-        public void PostcodeLoaderFail()
-        {
-            Assert.Throws<FailedToLoadPostcodeData>(() => new PostcodeLoader("Non Existant Path"));
-        }
+    [Test]
+    public void PostcodeLoaderFail()
+    {
+        Assert.Throws<FailedToLoadPostcodeData>(() => new PostcodeLoader("Non Existant Path"));
     }
 }

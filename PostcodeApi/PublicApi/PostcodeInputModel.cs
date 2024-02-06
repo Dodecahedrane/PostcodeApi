@@ -1,36 +1,35 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace PostcodeApi
+namespace PostcodeApi;
+
+public class PostcodeInputModel
 {
-    public class PostcodeInputModel
-    {
-        [Required(ErrorMessage = "Postcode is Required")]
-        [IsPostcode(ErrorMessage = "Postcode Not Valid")]
-        public required string Postcode { get; set; }
-    }
+    [Required(ErrorMessage = "Postcode is Required")]
+    [IsPostcode(ErrorMessage = "Postcode Not Valid")]
+    public required string Postcode { get; set; }
+}
 
-    public class PartialPostcodeInputModel
-    {
-        [Required(ErrorMessage = "Postcode is Required")]
-        [MaxLength(8, ErrorMessage = "Max Length of 8 Chars")]
-        public required string Postcode { get; set; }
+public class PartialPostcodeInputModel
+{
+    [Required(ErrorMessage = "Postcode is Required")]
+    [MaxLength(8, ErrorMessage = "Max Length of 8 Chars")]
+    public required string Postcode { get; set; }
 
-    }
+}
 
-    public class IsPostcode : ValidationAttribute
+public class IsPostcode : ValidationAttribute
+{
+    public override bool IsValid(object value)
     {
-        public override bool IsValid(object value)
+        if (value is string postcode)
         {
-            if (value is string postcode)
+            if (PostcodeHelper.IsPostcodeValid(PostcodeHelper.PostcodeFormatter(postcode)))
             {
-                if (PostcodeHelper.IsPostcodeValid(PostcodeHelper.PostcodeFormatter(postcode)))
-                {
-                    return true;
-                }
-
-                return false;
+                return true;
             }
+
             return false;
         }
+        return false;
     }
 }

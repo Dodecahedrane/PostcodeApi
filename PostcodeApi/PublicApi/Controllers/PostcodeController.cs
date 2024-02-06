@@ -7,117 +7,116 @@ using System.Reflection.PortableExecutable;
 using Microsoft.AspNetCore.Routing.Constraints;
 using static PostcodeApi.PostcodeHelper;
 
-namespace PostcodeApi.Controllers
+namespace PostcodeApi.Controllers;
+
+[Route("")]
+public class PostcodeController : Controller
 {
-    [Route("")]
-    public class PostcodeController : Controller
+    private readonly PostcodeLoader _postcodeLoader;
+
+    public PostcodeController(PostcodeLoader postcodeLoader)
     {
-        private readonly PostcodeLoader _postcodeLoader;
+        _postcodeLoader = postcodeLoader;
+    }
 
-        public PostcodeController(PostcodeLoader postcodeLoader)
+    [HttpGet("Postcode")]
+    public IActionResult GetPostcode([FromQuery] PostcodeInputModel input)
+    {
+        if (!ModelState.IsValid)
         {
-            _postcodeLoader = postcodeLoader;
+            return BadRequest(ModelState);
         }
 
-        [HttpGet("Postcode")]
-        public IActionResult GetPostcode([FromQuery] PostcodeInputModel input)
+        try
         {
-            if (!ModelState.IsValid)
+            string postcode = PostcodeHelper.PostcodeFormatter(input.Postcode);
+
+            PostcodeRecord? result = _postcodeLoader.Records.FirstOrDefault(
+                x => x.Postcode == postcode
+                );
+
+            if (result != null)
             {
-                return BadRequest(ModelState);
+                return Ok(result);
             }
-
-            try
+            else
             {
-                string postcode = PostcodeHelper.PostcodeFormatter(input.Postcode);
-
-                PostcodeRecord? result = _postcodeLoader.Records.FirstOrDefault(
-                    x => x.Postcode == postcode
-                    );
-
-                if (result != null)
-                {
-                    return Ok(result);
-                }
-                else
-                {
-                    return NotFound($"Postcode {postcode} not found.");
-                }
-            }
-            catch
-            {
-                return StatusCode(500, $"An error occurred");
+                return NotFound($"Postcode {postcode} not found.");
             }
         }
-
-        [HttpGet("AllPostcodes")]
-        public IActionResult GetAllPostcode()
+        catch
         {
-            try
-            {
-                return Ok(_postcodeLoader.Records);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, $"An error occurred: {ex.Message}");
-            }
+            return StatusCode(500, $"An error occurred");
+        }
+    }
+
+    [HttpGet("AllPostcodes")]
+    public IActionResult GetAllPostcode()
+    {
+        try
+        {
+            return Ok(_postcodeLoader.Records);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, $"An error occurred: {ex.Message}");
+        }
+    }
+
+    [HttpGet("ValidatePostcode")]
+    public IActionResult GetPostcodeValidation([FromQuery] PartialPostcodeInputModel input)
+    {
+        if (!ModelState.IsValid)
+        {
+            return BadRequest(ModelState);
         }
 
-        [HttpGet("ValidatePostcode")]
-        public IActionResult GetPostcodeValidation([FromQuery] PartialPostcodeInputModel input)
+        try
         {
-            if (!ModelState.IsValid)
+            if (!IsPostcodeValid(PostcodeFormatter(input.Postcode)))
             {
-                return BadRequest(ModelState);
+                return Ok(false);
             }
-
-            try
+            else
             {
-                if (!IsPostcodeValid(PostcodeFormatter(input.Postcode)))
-                {
-                    return Ok(false);
-                }
-                else
-                {
-                    return Ok(true);
-                }
+                return Ok(true);
             }
-            catch
-            {
-                return StatusCode(500, $"An error occurred");
-            }
-            
-        } 
-
-        [HttpGet("PartialPostcode")]
-        public IActionResult GetPartialPostcode([FromQuery] PartialPostcodeInputModel input)
+        }
+        catch
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+            return StatusCode(500, $"An error occurred");
+        }
+        
+    } 
 
-            try
-            {
-                string partialPostcode = PostcodeHelper.PostcodeFormatter(input.Postcode);
+    [HttpGet("PartialPostcode")]
+    public IActionResult GetPartialPostcode([FromQuery] PartialPostcodeInputModel input)
+    {
+        if (!ModelState.IsValid)
+        {
+            return BadRequest(ModelState);
+        }
 
-                List<PostcodeRecord> result = _postcodeLoader.Records
-                    .Where(record => record.Postcode.Contains(partialPostcode))
-                    .ToList();
+        try
+        {
+            string partialPostcode = PostcodeHelper.PostcodeFormatter(input.Postcode);
 
-                if (result.Count > 0)
-                {
-                    return Ok(result);
-                }
-                else
-                {
-                    return NotFound($"No partial matches for {partialPostcode} found.");
-                }
-            }
-            catch
+            List<PostcodeRecord> result = _postcodeLoader.Records
+                .Where(record => record.Postcode.Contains(partialPostcode))
+                .ToList();
+
+            if (result.Count > 0)
             {
-                return StatusCode(500, $"An error occurred");
+                return Ok(result);
             }
+            else
+            {
+                return NotFound($"No partial matches for {partialPostcode} found.");
+            }
+        }
+        catch
+        {
+            return StatusCode(500, $"An error occurred");
         }
     }
 }
