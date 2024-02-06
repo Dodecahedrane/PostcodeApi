@@ -71,14 +71,27 @@ namespace PostcodeApi.Controllers
         [HttpGet("ValidatePostcode")]
         public IActionResult GetPostcodeValidation([FromQuery] PostcodeInputModel input)
         {
-            if (!IsPostcodeValid(PostcodeFormatter(input.Postcode)))
+            if (input.Postcode == "")
             {
-                return Ok(false);
+                return BadRequest($"Postcode URL Parameter is Null");
             }
-            else
+
+            try
             {
-                return Ok(true);
+                if (!IsPostcodeValid(PostcodeFormatter(input.Postcode)))
+                {
+                    return Ok(false);
+                }
+                else
+                {
+                    return Ok(true);
+                }
             }
+            catch
+            {
+                return StatusCode(500, $"An error occurred");
+            }
+            
         } 
 
         [HttpGet("PartialPostcode")]
