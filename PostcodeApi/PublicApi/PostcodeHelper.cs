@@ -4,7 +4,7 @@ using System.Text.RegularExpressions;
 
 namespace PostcodeApi
 {
-    public class PostcodeHelper
+    public partial class PostcodeHelper
     {
         public const string pattern = "^([Gg][Ii][Rr] 0[Aa]{2})|((([A-Za-z][0-9]{1,2})|(([A-Za-z][A-Ha-hJ-Yj-y][0-9]{1,2})|(([A-Za-z][0-9][A-Za-z])|([A-Za-z][A-Ha-hJ-Yj-y][0-9][A-Za-z]?))))\\s?[0-9][A-Za-z]{2})";
 
@@ -18,7 +18,7 @@ namespace PostcodeApi
 
             // Regex to match a postcode
             
-            bool isValid = Regex.IsMatch(postcode, pattern);
+            bool isValid = PostcodePattern().IsMatch(postcode);
 
             return isValid;
         }
@@ -27,6 +27,9 @@ namespace PostcodeApi
         {
             return postcode.Replace(" ", "").ToUpper();
         }
+
+        [GeneratedRegex("^([Gg][Ii][Rr] 0[Aa]{2})|((([A-Za-z][0-9]{1,2})|(([A-Za-z][A-Ha-hJ-Yj-y][0-9]{1,2})|(([A-Za-z][0-9][A-Za-z])|([A-Za-z][A-Ha-hJ-Yj-y][0-9][A-Za-z]?))))\\s?[0-9][A-Za-z]{2})")]
+        private static partial Regex PostcodePattern();
     }
 
     
