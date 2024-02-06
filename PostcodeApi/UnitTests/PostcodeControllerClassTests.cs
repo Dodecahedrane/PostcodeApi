@@ -38,22 +38,6 @@ namespace UnitTests
         }
 
         [Test]
-        public void GetPostcodeBadRequestInvalidPostcode()
-        {
-            var result = _controller.GetPostcode(new PostcodeInputModel { Postcode = "ABC" });
-
-            Assert.That(result, Is.InstanceOf<BadRequestObjectResult>());
-        }
-
-        [Test]
-        public void GetPostcodeBadRequestNullPostcode()
-        {
-            var result = _controller.GetPostcode(new PostcodeInputModel { Postcode = "" });
-
-            Assert.That(result, Is.InstanceOf<BadRequestObjectResult>());
-        }
-
-        [Test]
         public void GetPostcodeNotFound()
         {
             var result = _controller.GetPostcode(new PostcodeInputModel { Postcode = "ZZ999ZZ" });
@@ -72,23 +56,15 @@ namespace UnitTests
         [Test]
         public void GetPartialPostcodeOk()
         {
-            var result = _controller.GetPartialPostcode(new PostcodeInputModel { Postcode = "PL4" });
+            var result = _controller.GetPartialPostcode(new PartialPostcodeInputModel { Postcode = "PL4" });
 
             Assert.That(result, Is.InstanceOf<OkObjectResult>());
         }
 
         [Test]
-        public void GetPartialPostcodeBadRequest()
-        {
-            var result = _controller.GetPartialPostcode(new PostcodeInputModel { Postcode = "" });
-
-            Assert.That(result, Is.InstanceOf<BadRequestObjectResult>());
-        }
-
-        [Test]
         public void GetPartialPostcodeNotFound()
         {
-            var result = _controller.GetPartialPostcode(new PostcodeInputModel { Postcode = "ZZ999" });
+            var result = _controller.GetPartialPostcode(new PartialPostcodeInputModel { Postcode = "ZZ999" });
 
             Assert.That(result, Is.InstanceOf<NotFoundObjectResult>());
         }
@@ -112,7 +88,7 @@ namespace UnitTests
 
             foreach (var kvp in testCases)
             {
-                var result = _controller.GetPostcodeValidation(new PostcodeInputModel { Postcode = kvp.Key });
+                var result = _controller.GetPostcodeValidation(new PartialPostcodeInputModel { Postcode = kvp.Key });
 
                 Assert.That(result, Is.InstanceOf<OkObjectResult>());
 

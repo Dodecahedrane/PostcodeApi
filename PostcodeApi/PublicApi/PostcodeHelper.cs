@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.FileSystemGlobbing.Internal;
+using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
 
 namespace PostcodeApi
@@ -27,4 +28,6 @@ namespace PostcodeApi
             return postcode.Replace(" ", "").ToUpper();
         }
     }
+
+    
 }

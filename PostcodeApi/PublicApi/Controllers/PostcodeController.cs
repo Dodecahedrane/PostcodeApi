@@ -22,20 +22,15 @@ namespace PostcodeApi.Controllers
         [HttpGet("Postcode")]
         public IActionResult GetPostcode([FromQuery] PostcodeInputModel input)
         {
-            string postcode = PostcodeHelper.PostcodeFormatter(input.Postcode);
-
-            if (postcode == "")
+            if (!ModelState.IsValid)
             {
-                return BadRequest($"Postcode URL Parameter is Null");
-            }
-
-            if (!PostcodeHelper.IsPostcodeValid(postcode))
-            {
-                return BadRequest("Invalid Postcode");
+                return BadRequest(ModelState);
             }
 
             try
             {
+                string postcode = PostcodeHelper.PostcodeFormatter(input.Postcode);
+
                 PostcodeRecord? result = _postcodeLoader.Records.FirstOrDefault(
                     x => x.Postcode == postcode
                     );
@@ -69,11 +64,11 @@ namespace PostcodeApi.Controllers
         }
 
         [HttpGet("ValidatePostcode")]
-        public IActionResult GetPostcodeValidation([FromQuery] PostcodeInputModel input)
+        public IActionResult GetPostcodeValidation([FromQuery] PartialPostcodeInputModel input)
         {
-            if (input.Postcode == "")
+            if (!ModelState.IsValid)
             {
-                return BadRequest($"Postcode URL Parameter is Null");
+                return BadRequest(ModelState);
             }
 
             try
@@ -95,17 +90,17 @@ namespace PostcodeApi.Controllers
         } 
 
         [HttpGet("PartialPostcode")]
-        public IActionResult GetPartialPostcode([FromQuery] PostcodeInputModel input)
+        public IActionResult GetPartialPostcode([FromQuery] PartialPostcodeInputModel input)
         {
-            string partialPostcode = PostcodeHelper.PostcodeFormatter(input.Postcode);
-
-            if (partialPostcode == "")
+            if (!ModelState.IsValid)
             {
-                return BadRequest($"Postcode URL Parameter is Null");
+                return BadRequest(ModelState);
             }
 
             try
             {
+                string partialPostcode = PostcodeHelper.PostcodeFormatter(input.Postcode);
+
                 List<PostcodeRecord> result = _postcodeLoader.Records
                     .Where(record => record.Postcode.Contains(partialPostcode))
                     .ToList();
