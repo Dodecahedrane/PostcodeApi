@@ -1,3 +1,6 @@
+![Workflow Badge](https://github.com/Dodecahedrane/PostcodeApi/actions/workflows/dotnet_deploy.yaml/badge.svg)
+![CodeQL](https://github.com/Dodecahedrane/PostcodeApi/actions/workflows/codeql.yml/badge.svg)
+
 # PostcodeApi
 
 Current End Point: [https://postcode.azurewebsites.net/](https://postcode.azurewebsites.net/)
