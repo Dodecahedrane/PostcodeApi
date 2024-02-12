@@ -14,6 +14,9 @@ The data source is the [ONS Postcode Directory](https://geoportal.statistics.gov
 
 More data will be added as this project is developed. 
 
+## The Implementation
+
+The CSV file that stores the postcode data is loaded into memory when the first request is made (and the PostcodeLoader class is instantiated). It is loaded into a dictionary. I performed [some benchmarks](https://github.com/Dodecahedrane/PostcodeTest/tree/master) on a previous implemntation to see what performs best for this usecase.
 
 ## API Documentation
 
