@@ -31,9 +31,7 @@ public class PostcodeController : Controller
         {
             string postcode = PostcodeHelper.PostcodeFormatter(input.Postcode);
 
-            PostcodeRecord? result = _postcodeLoader.Records.FirstOrDefault(
-                x => x.Postcode == postcode
-                );
+            PostcodeRecord? result = _postcodeLoader.Records[postcode];
 
             if (result != null)
             {
@@ -41,8 +39,12 @@ public class PostcodeController : Controller
             }
             else
             {
-                return NotFound($"Postcode {postcode} not found.");
+                return NotFound($"Postcode {input.Postcode} not found.");
             }
+        }
+        catch (KeyNotFoundException ex)
+        {
+            return NotFound($"Postcode {input.Postcode} not found.");
         }
         catch
         {
@@ -55,7 +57,7 @@ public class PostcodeController : Controller
     {
         try
         {
-            return Ok(_postcodeLoader.Records);
+            return Ok(_postcodeLoader.Records.Values.ToList());
         }
         catch (Exception ex)
         {
@@ -102,6 +104,7 @@ public class PostcodeController : Controller
             string partialPostcode = PostcodeHelper.PostcodeFormatter(input.Postcode);
 
             List<PostcodeRecord> result = _postcodeLoader.Records
+                .Values
                 .Where(record => record.Postcode.Contains(partialPostcode))
                 .ToList();
 
