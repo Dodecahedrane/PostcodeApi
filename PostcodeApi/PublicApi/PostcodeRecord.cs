@@ -5,11 +5,9 @@ namespace PostcodeApi;
 public class PostcodeRecord
 {
     [Name("pcd")]
-    public string Postcode
+    public string? Postcode
     {
-#pragma warning disable CS8603 // Possible null reference return. Not sure if/how this should be structured differently?
         get => _postcode;
-#pragma warning restore CS8603 // Possible null reference return.
         set => _postcode = value.Replace(" ", string.Empty);
     }
 
